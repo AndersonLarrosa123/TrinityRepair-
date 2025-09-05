@@ -1,0 +1,168 @@
+/* ------------------------------
+   Variables de color
+------------------------------ */
+:root {
+  --color-bg: #111;
+  --color-text: #eee;
+  --color-primary: #2ecc71;
+  --color-accent: #00c8ff;
+  --color-secondary: #1e1e1e;
+  --color-navbar: rgba(30,30,30,0.95);
+  --color-footer: #000;
+  --transition-speed: 0.4s;
+  --card-radius: 20px;
+  --card-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.7);
+  --btn-radius: 35px;
+}
+
+/* ------------------------------
+   Reset & Base
+------------------------------ */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height:1.6;
+  scroll-behavior:smooth;
+}
+
+/* ------------------------------
+   Navbar
+------------------------------ */
+.navbar {
+  position: fixed;
+  top:0; left:0; width:100%;
+  background: var(--color-navbar);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  backdrop-filter: blur(12px);
+  z-index:1000;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+}
+.logo-container { display:flex; align-items:center; gap:10px; }
+.logo-container img { width:45px; height:45px; border-radius:50%; transition: transform 0.3s; }
+.logo-container img:hover { transform: rotate(10deg) scale(1.1); }
+.logo-text { font-weight:800; font-size:1.3rem; color: var(--color-accent); letter-spacing:1px; }
+.menu { display:flex; gap:25px; align-items:center; }
+.menu a { text-decoration:none; color: var(--color-text); font-weight:600; position:relative; transition: color var(--transition-speed); }
+.menu a::after { content:''; position:absolute; width:0; height:2px; background: var(--color-primary); left:0; bottom:-5px; transition:width var(--transition-speed); }
+.menu a:hover { color: var(--color-primary); }
+.menu a:hover::after { width:100%; }
+.menu a.active { color: var(--color-primary); }
+
+/* ------------------------------
+   Tickets horizontal
+------------------------------ */
+.ticket-container {
+  max-width:1200px;
+  margin:120px auto 50px;
+  padding:0 20px;
+}
+.ticket-container h1 {
+  text-align:center;
+  color: var(--color-primary);
+  margin-bottom:30px;
+}
+.ticket-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+  justify-content:flex-start;
+}
+.ticket-card {
+  background: linear-gradient(145deg, var(--color-secondary), #2b2b2b);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding:20px;
+  flex:1 1 350px;
+  display:flex;
+  flex-direction:column;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  position:relative;
+  overflow:hidden;
+}
+.ticket-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-shadow-hover);
+}
+.ticket-card h2 {
+  color: var(--color-accent);
+  margin-bottom:12px;
+}
+
+/* ------------------------------
+   Barra de estados
+------------------------------ */
+.estado-barra {
+  display:flex;
+  justify-content:space-between;
+  margin:15px 0;
+}
+.estado-step {
+  flex:1;
+  text-align:center;
+  padding:10px 5px;
+  font-size:0.9rem;
+  color:#aaa;
+  position:relative;
+  transition: all var(--transition-speed);
+}
+.estado-step::after {
+  content:'';
+  position:absolute;
+  height:3px;
+  width:100%;
+  background:#555;
+  bottom:0;
+  left:0;
+  z-index:-1;
+}
+.estado-step.completo {
+  color: var(--color-primary);
+}
+.estado-step.activo {
+  color: var(--color-accent);
+  font-weight:bold;
+}
+.estado-step.completo::after,
+.estado-step.activo::after {
+  background: var(--color-primary);
+}
+
+/* ------------------------------
+   Info adicional
+------------------------------ */
+.ticket-card div { margin:5px 0; font-size:0.95rem; }
+.cancel-btn {
+  margin-top:10px;
+  padding:10px 16px;
+  border:none;
+  border-radius: var(--btn-radius);
+  background:#e74c3c;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.cancel-btn:hover {
+  background:#c0392b;
+  transform: translateY(-2px);
+}
+
+/* Mensaje sin tickets */
+.no-tickets {
+  text-align:center;
+  margin-top:50px;
+  font-size:1.2rem;
+  color:#aaa;
+}
+
+/* ------------------------------
+   Responsive
+------------------------------ */
+@media(max-width:992px){ .ticket-card{ flex:1 1 45%; } }
+@media(max-width:768px){ .menu{ display:none; } .ticket-card{ flex:1 1 100%; } }
